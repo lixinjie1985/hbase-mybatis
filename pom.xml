@@ -23,10 +23,13 @@
 		<eop-common.version>0.0.1-SNAPSHOT</eop-common.version>
 		<thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
 		<thymeleaf-layout-dialect.version>2.1.1</thymeleaf-layout-dialect.version>
-		<druid-spring-boot-starter>1.1.6</druid-spring-boot-starter>
-		<mybatis-spring-boot-starter>1.3.2</mybatis-spring-boot-starter>
-		<pagehelper-spring-boot-starter>1.2.3</pagehelper-spring-boot-starter>
-		<dubbo-spring-boot-starter>0.1.0</dubbo-spring-boot-starter>
+		<druid-spring-boot-starter.version>1.1.6</druid-spring-boot-starter.version>
+		<mybatis-spring-boot-starter.version>1.3.2</mybatis-spring-boot-starter.version>
+		<pagehelper-spring-boot-starter.version>1.2.3</pagehelper-spring-boot-starter.version>
+		<dubbo-spring-boot-starter.version>0.1.0</dubbo-spring-boot-starter.version>
+		<hbase.version>2.0.0</hbase.version>
+		<phoenix.version>5.0.0-HBase-2.0</phoenix.version>
+		<hadoop.version>2.8.5</hadoop.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.7</java.version>
@@ -60,6 +63,16 @@
 		</dependency>
 		 -->
 		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase</artifactId>
+			<version>${hbase.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.phoenix</groupId>
+			<artifactId>phoenix</artifactId>
+			<version>${phoenix.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
@@ -80,23 +93,23 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid-spring-boot-starter</artifactId>
-			<version>${druid-spring-boot-starter}</version>
+			<version>${druid-spring-boot-starter.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>${mybatis-spring-boot-starter}</version>
+			<version>${mybatis-spring-boot-starter.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
-			<version>${pagehelper-spring-boot-starter}</version>
+			<version>${pagehelper-spring-boot-starter.version}</version>
 		</dependency>
 		<!-- 
 		<dependency>
 			<groupId>com.alibaba.boot</groupId>
 			<artifactId>dubbo-spring-boot-starter</artifactId>
-			<version>${dubbo-spring-boot-starter}</version>
+			<version>${dubbo-spring-boot-starter.version}</version>
 		</dependency>
 		 -->
 		<dependency>
