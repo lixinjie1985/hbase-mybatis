@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>index</title>
+</head>
+<body>
+<form name='f' action='/eop-sb/logout-process' method='POST'>
+<input th:name="${#request.getAttribute('org.springframework.security.web.csrf.CsrfToken').getParameterName()}" type="hidden" th:value="${#request.getAttribute('org.springframework.security.web.csrf.CsrfToken').getToken()}" />
+<input name="submit" type="submit" value="Logout"/>
+</form>
+</body>
+</html>
