@@ -24,9 +24,9 @@ httpinvoker:
       write-timeout: 60000
 
 server:
-  display-name: eop-sb
+  display-name: hbase-mybatis
   port: ${port:8080}
-  context-path: /eop-sb
+  context-path: /hbase-mybatis
   connection-timeout: 20000
   session:
     timeout: 1800
@@ -43,67 +43,67 @@ server:
     uri-encoding: UTF-8      
     accept-count: 100
 
-mybatis:
-  config-location: classpath:mybatis/mybatis-config.xml
-  mapper-locations: classpath:mybatis/mapper/**/*.xml
-  executor-type: REUSE
-  check-config-location: true
-
-pagehelper:
-  helper-dialect: mysql
-  offset-as-page-num: "true"
-  row-bounds-with-count: "true"
-  page-size-zero: "false"
-  reasonable: "false"
-  params: pageNum=pageNum;pageSize=pageSize;count=countSql;reasonable=reasonable;pageSizeZero=pageSizeZero
-  support-methods-arguments: "true"
-  auto-runtime-dialect: "false"
-  close-conn: "true"
+#mybatis:
+#  config-location: classpath:mybatis/mybatis-config.xml
+#  mapper-locations: classpath:mybatis/mapper/**/*.xml
+#  executor-type: REUSE
+#  check-config-location: true
+#
+#pagehelper:
+#  helper-dialect: mysql
+#  offset-as-page-num: "true"
+#  row-bounds-with-count: "true"
+#  page-size-zero: "false"
+#  reasonable: "false"
+#  params: pageNum=pageNum;pageSize=pageSize;count=countSql;reasonable=reasonable;pageSizeZero=pageSizeZero
+#  support-methods-arguments: "true"
+#  auto-runtime-dialect: "false"
+#  close-conn: "true"
 
 #dubbo:
 #  application:
-#    id: eop-sb
-#    name: eop-sb
+#    id: hbase-mybatis
+#    name: hbase-mybatis
 #  registry:
-#    id: eop-sb-registry
+#    id: hbase-mybatis-registry
 #    client: curator
 #    protocol: zookeeper
 #    address: 127.0.0.1:2181
 #  protocol:
-#    id: eop-sb-protocol
+#    id: hbase-mybatis-protocol
 #    name: dubbo
 #    port: 20880
 #  scan:
 #    base-packages: org.eop.sb.**.dubbo.provider,org.eop.sb.**.dubbo.consumer
 
 spring:
-  datasource:
-    druid:
-      url: jdbc:mysql://117.159.10.:23306/user_mgt_db?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
-      #url: jdbc:mysql://192.168.0.206:3306/user_mgt_db?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
-      username: user_mgt
-      password: Wcgw21TmhSeOqG//KtalEpUoSmIF4QtNnit7tHWLM/GYvyPx/KFaFe0B0qkSg6CrNSqzns7Fo1fbEcPItPhiPQ==
-      driver-class-name: com.mysql.jdbc.Driver
-      filters: config
-      connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIK6NuBk1kXtvq93jFvxBYefVWo2mVqZaSXXuhkG7p7lj/W99+3vEzC3OsQaCqawGHc6henChDcCgPY7Q0rvj38CAwEAAQ==
-      connection-error-retry-attempts: 0
-      initial-size: 1
-      max-active: 200
-      min-idle: 1
-      max-wait: 20000
-      pool-prepared-statements: false
-      max-pool-prepared-statement-per-connection-size:  -1
-      max-open-prepared-statements: -1
-      validation-query: select 1
-      validation-query-timeout: 3
-      test-on-borrow: false
-      test-on-return: false
-      test-while-idle: true
-      time-between-eviction-runs-millis: 60000
-      min-evictable-idle-time-millis: 1800000
-      max-evictable-idle-time-millis: 1800000
+#  datasource:
+#    druid:
+#      url: jdbc:mysql://117.159.10.:23306/user_mgt_db?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
+#      #url: jdbc:mysql://192.168.0.206:3306/user_mgt_db?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
+#      username: user_mgt
+#      password: Wcgw21TmhSeOqG//KtalEpUoSmIF4QtNnit7tHWLM/GYvyPx/KFaFe0B0qkSg6CrNSqzns7Fo1fbEcPItPhiPQ==
+#      driver-class-name: com.mysql.jdbc.Driver
+#      filters: config
+#      connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIK6NuBk1kXtvq93jFvxBYefVWo2mVqZaSXXuhkG7p7lj/W99+3vEzC3OsQaCqawGHc6henChDcCgPY7Q0rvj38CAwEAAQ==
+#      connection-error-retry-attempts: 0
+#      initial-size: 1
+#      max-active: 200
+#      min-idle: 1
+#      max-wait: 20000
+#      pool-prepared-statements: false
+#      max-pool-prepared-statement-per-connection-size:  -1
+#      max-open-prepared-statements: -1
+#      validation-query: select 1
+#      validation-query-timeout: 3
+#      test-on-borrow: false
+#      test-on-return: false
+#      test-while-idle: true
+#      time-between-eviction-runs-millis: 60000
+#      min-evictable-idle-time-millis: 1800000
+#      max-evictable-idle-time-millis: 1800000
   application:
-    name: eop-sb
+    name: hbase-mybatis
   mandatory-file-encoding: UTF-8
   http:
     converters:
@@ -112,7 +112,6 @@ spring:
       charset: UTF-8
       force: true
     multipart:
-      location: ../uploadfiles
       max-file-size: 10MB
       max-request-size: 50MB
   jackson:
@@ -133,28 +132,28 @@ spring:
     - classpath:/static/
     - classpath:/public/
     - file:D:/
-  session:
-    store-type: REDIS
-    redis:
-      flush-mode: ON_SAVE
-    cleanup:
-      cron:
-        expression: ${sessionCleanupCron:0 0/2 * * * ?}
-  thymeleaf:
-    cache: false
-    encoding: UTF-8
-    mode: HTML
-    prefix: classpath:/templates/
-    suffix: .html
-  redis:
-    host: 117.159.10.
-    #host: 192.168.0.206
-    password: 
-    port: 26379
-    timeout: 3000
-    pool:
-      max-active: 10000
-      max-idle: 100
+#  session:
+#    store-type: REDIS
+#    redis:
+#      flush-mode: ON_SAVE
+#    cleanup:
+#      cron:
+#        expression: ${sessionCleanupCron:0 0/2 * * * ?}
+#  thymeleaf:
+#    cache: false
+#    encoding: UTF-8
+#    mode: HTML
+#    prefix: classpath:/templates/
+#    suffix: .html
+#  redis:
+#    host: 117.159.10.
+#    #host: 192.168.0.206
+#    password: 
+#    port: 26379
+#    timeout: 3000
+#    pool:
+#      max-active: 10000
+#      max-idle: 100
 #    cluster:
 #      nodes: host:port,host:port,host:port
 #      max-redirects: 5
@@ -163,6 +162,6 @@ spring:
 logging:
   config: classpath:logback/logback-spring.xml
   path: ../tomcat/logs
-  file: eop-sb.log
+  file: hbase-mybatis.log
   level:
     root: INFO
