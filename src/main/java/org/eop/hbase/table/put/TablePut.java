@@ -23,15 +23,15 @@ public class TablePut {
 	@Autowired
 	private HbaseTable hbaseTable;
 	
-	public void putOneRow(String tableName, String rowKey,
-			String[]... columnFamilyQualifierValues) throws IOException {
+	//cfqvs=columnFamilyQualifierValues
+	public void putOne(String tableName, String rowKey, String[]... cfqvs) throws IOException {
 		Put put = new Put(Bytes.toBytes(rowKey));
 		CellBuilder cb = CellBuilderFactory.create(CellBuilderType.SHALLOW_COPY);
-		for (String[] cfqv : columnFamilyQualifierValues) {
-			//
+		for (String[] cfqv : cfqvs) {
+			//加入列（方法一）
 			put.addColumn(Bytes.toBytes(cfqv[0]),
 				Bytes.toBytes(cfqv[1]), Bytes.toBytes(cfqv[2]));
-			//
+			//加入列（方法二）
 			cb.setFamily(Bytes.toBytes(cfqv[0])).setQualifier(Bytes.toBytes(cfqv[1]))
 				.setValue(Bytes.toBytes(cfqv[2]));
 			put.add(cb.build());
@@ -40,8 +40,16 @@ public class TablePut {
 		hbaseTable.getTable(tableName).put(put);
 	}
 	
-	public void putManyRows(String tableName) throws IOException {
+	public void putMany(String tableName, String[] rowKeys, String[][]... cfqvss) throws IOException {
 		List<Put> puts = new ArrayList<>();
+		for (int i = 0, lenght = rowKeys.length; i < lenght; i++) {
+			Put put = new Put(Bytes.toBytes(rowKeys[i]));
+			for (String[] cfqv : cfqvss[i]) {
+				put.addColumn(Bytes.toBytes(cfqv[0]),
+						Bytes.toBytes(cfqv[1]), Bytes.toBytes(cfqv[2]));
+			}
+			puts.add(put);
+		}
 		hbaseTable.getTable(tableName).put(puts);
 	}
 }
