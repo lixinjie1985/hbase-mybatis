@@ -1,4 +1,15 @@
 #java -cp druid-1.1.6.jar com.alibaba.druid.filter.config.ConfigTools <password>
+hbase:
+  zookeeper:
+    quorum: 172.18.232.181:2181
+  rpc:
+    timeout: 60000
+    read-timeout: 60000
+    write-timeout: 60000
+  client:
+    operation-timeout: 60000
+    scanner-timeout-period: 60000
+  
 idgenerator:
   generators:
     idGenerator:
