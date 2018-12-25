@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class HbaseApplication {
 
 	public static void main(String[] args) {
+		System.setProperty("hadoop.home.dir", "G:\\hadoop\\hadoop-2.8.5");
 		SpringApplication.run(HbaseApplication.class, args);
 	}
 }

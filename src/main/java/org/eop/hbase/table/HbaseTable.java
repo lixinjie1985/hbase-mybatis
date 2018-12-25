@@ -30,4 +30,8 @@ public class HbaseTable {
 			.setReadRpcTimeout(0).setWriteRpcTimeout(0);
 		return builder.build();
 	}
+	
+	public void closeTable(Table table) throws IOException {
+		table.close();
+	}
 }
