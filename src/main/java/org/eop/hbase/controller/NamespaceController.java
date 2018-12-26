@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lixinjie
  * @since 2018-12-26
  */
-@RequestMapping("/hbase")
+@RequestMapping("/hbase/namespace")
 @RestController
-public class HbaseController {
+public class NamespaceController {
 
 	@Autowired
 	private HbaseAdmin hbaseAdmin;
 	
-	@RequestMapping("/namespace/list")
+	@RequestMapping("/list")
 	public List<NamespaceDescriptor> listNamespaces() throws IOException {
 		Admin admin = hbaseAdmin.getAdmin();
 		NamespaceDescriptor[] nds = admin.listNamespaceDescriptors();
@@ -31,7 +31,7 @@ public class HbaseController {
 		return Arrays.asList(nds);
 	}
 	
-	@RequestMapping("/namespace/get")
+	@RequestMapping("/get")
 	public NamespaceDescriptor getNamespace(String name) throws NamespaceNotFoundException, IOException {
 		Admin admin = hbaseAdmin.getAdmin();
 		NamespaceDescriptor nd = admin.getNamespaceDescriptor(name);
@@ -39,7 +39,7 @@ public class HbaseController {
 		return nd;
 	}
 	
-	@RequestMapping("/namespace/create")
+	@RequestMapping("/create")
 	public String createNamespace(String name) throws IOException {
 		//系统命名空间，由Hbase自己使用
 		NamespaceDescriptor sysND = NamespaceDescriptor.SYSTEM_NAMESPACE;
@@ -64,11 +64,12 @@ public class HbaseController {
 		hbaseAdmin.getAdmin().modifyNamespace(nd);
 	}
 	
-	@RequestMapping("/namespace/delete")
+	@RequestMapping("/delete")
 	public String deleteNamespace(String name) throws IOException {
 		Admin admin = hbaseAdmin.getAdmin();
 		admin.deleteNamespace(name);
 		hbaseAdmin.closeAdmin(admin);
 		return "success";
 	}
+	
 }
