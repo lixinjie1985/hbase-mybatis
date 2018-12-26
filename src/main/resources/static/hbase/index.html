@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hbase</title>
+</head>
+<body>
+<input type="button" value="列出所有命名空间" id="list" />
+</body>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+$("#list").click(function(){
+	$.post('/hbase-mybatis/hbase/namespace/list',{},function(data){
+		alert(data);
+	});
+});
+</script>
+</html>
