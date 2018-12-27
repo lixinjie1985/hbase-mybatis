@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hbase</title>
+</head>
+<body>
+<span style="color:red">结果：</span><br />
+<textarea id="result" rows="4" cols="50"></textarea>
+<br />
+<br />
+命名空间：<input type="text" id="namespace" />
+表名：<input type="text" id="name" />
+系统表：<input type="radio" name="includeSysTables" id="i1" value="true" /><label for="i1">包括</label>
+<input type="radio" name="includeSysTables" id="i2" value="false" /><label for="i2">不包括</label>
+<input type="radio" name="includeSysTables" id="i3" value="null" /><label for="i3">不选</label>
+<br />
+<br />
+<input type="button" value="listTableNames" id="listTableNames" />
+<input type="button" value="listTableNamesByNameRegex" id="listTableNamesByNameRegex" />
+<input type="button" value="listTableNamesByNamespace" id="listTableNamesByNamespace" />
+<br/>
+<input type="button" value="listTableDescriptors" id="listTableDescriptors" />
+<input type="button" value="listTableDescriptorsByNames" id="listTableDescriptorsByNames" />
+<input type="button" value="listTableDescriptorsByNameRegex" id="listTableDescriptorsByNameRegex" />
+<input type="button" value="listTableDescriptorsByNamespace" id="listTableDescriptorsByNamespace" />
+<input type="button" value="getDescriptor" id="getDescriptor" />
+<br/>
+<input type="button" value="tableExists" id="tableExists" />
+<input type="button" value="isTableDisabled" id="isTableDisabled" />
+<input type="button" value="disableTable" id="disableTable" />
+<input type="button" value="isTableEnabled" id="isTableEnabled" />
+<input type="button" value="enableTable" id="enableTable" />
+<input type="button" value="isTableAvailable" id="isTableAvailable" />
+<br/>
+<input type="button" value="创建命名空间" id="namespacecreate" />
+<input type="button" value="删除命名空间" id="namespacedelete" />
+<input type="button" value="列出所有命名空间" id="namespacelist" />
+<input type="button" value="查询命名空间" id="namespaceget" />
+<input type="button" value="创建命名空间" id="namespacecreate" />
+<input type="button" value="删除命名空间" id="namespacedelete" />
+<br />
+</body>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+	var namespace = $('#namespace').val();
+	var name = $('#name').val();
+	var includeSysTables = $('input[type=radio]:checked').val();
+	var params = {};
+	if (namespace.length > 0) {
+		params.namespace = namespace;
+	}
+	if (name.length > 0) {
+		params.name = name;
+	}
+	if (includeSysTables != 'null') {
+		params.includeSysTables = includeSysTables;
+	}
+	
+$("#listTableNames").click(function(){
+	$.post('/hbase-mybatis/hbase/table/listTableNames',params,function(data){
+		$('#result').val(JSON.stringify(data));
+	});
+});
+$("#listTableNamesByNameRegex").click(function(){
+	$.post('/hbase-mybatis/hbase/table/listTableNamesByNameRegex',params,function(data){
+		$('#result').val(JSON.stringify(data));
+	});
+});
+$("#listTableNamesByNamespace").click(function(){
+	$.post('/hbase-mybatis/hbase/table/listTableNamesByNamespace',params,function(data){
+		$('#result').val(JSON.stringify(data));
+	});
+});
+
+$("#listTableDescriptors").click(function(){
+	$.post('/hbase-mybatis/hbase/table/listTableDescriptors',params,function(data){
+		$('#result').val(JSON.stringify(data));
+	});
+});
+$("#listTableDescriptorsByNames").click(function(){
+	$.post('/hbase-mybatis/hbase/table/listTableDescriptorsByNames',params,function(data){
+		$('#result').val(JSON.stringify(data));
+	});
+});
+$("#listTableDescriptorsByNameRegex").click(function(){
+	var name = $('#name').val();
+	$.post('/hbase-mybatis/hbase/table/listTableDescriptorsByNameRegex',params,function(data){
+		$('#result').val(JSON.stringify(data));
+	});
+});
+$("#listTableDescriptorsByNamespace").click(function(){
+	var name = $('#name').val();
+	$.post('/hbase-mybatis/hbase/table/listTableDescriptorsByNamespace',params,function(data){
+		$('#result').val(JSON.stringify(data));
+	});
+});
+$("#getDescriptor").click(function(){
+	var name = $('#name').val();
+	$.post('/hbase-mybatis/hbase/table/getDescriptor',params,function(data){
+		$('#result').val(JSON.stringify(data));
+	});
+});
+</script>
+</html>
