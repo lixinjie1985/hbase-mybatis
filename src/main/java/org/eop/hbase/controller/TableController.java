@@ -17,6 +17,7 @@ import org.apache.hadoop.hbase.util.Bytes;
 import org.eop.hbase.admin.HbaseAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -40,7 +41,7 @@ public class TableController {
 	}
 	
 	@RequestMapping("/listTableNamesByNameRegex")
-	public List<TableName> listTableNames(String nameRegex, Boolean includeSysTables) throws IOException {
+	public List<TableName> listTableNames(@RequestParam("name")String nameRegex, Boolean includeSysTables) throws IOException {
 		Admin admin = hbaseAdmin.getAdmin();
 		Pattern pattern = Pattern.compile(nameRegex);
 		TableName[] tableNames = null;
@@ -74,7 +75,7 @@ public class TableController {
 	//如果没有指定namespace，names可以带，
 	//也可以不带，不带时使用默认的命名空间
 	@RequestMapping("/listTableDescriptorsByNames")
-	public List<TableDescriptor> listTableDescriptors(String namespace, String... names) throws IOException {
+	public List<TableDescriptor> listTableDescriptors(String namespace, @RequestParam("name")String... names) throws IOException {
 		Admin admin = hbaseAdmin.getAdmin();
 		List<TableName> tableNames = new ArrayList<>();
 		for (String name : names) {
@@ -88,7 +89,7 @@ public class TableController {
 	}
 	
 	@RequestMapping("/listTableDescriptorsByNameRegex")
-	public List<TableDescriptor> listTableDescriptors(String nameRegex, Boolean includeSysTables) throws IOException {
+	public List<TableDescriptor> listTableDescriptors(@RequestParam("name")String nameRegex, Boolean includeSysTables) throws IOException {
 		Admin admin = hbaseAdmin.getAdmin();
 		Pattern pattern = Pattern.compile(nameRegex);
 		List<TableDescriptor> list = null;

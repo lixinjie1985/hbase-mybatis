@@ -6,7 +6,7 @@
 </head>
 <body>
 <span style="color:red">结果：</span><br />
-<textarea id="result" rows="4" cols="50"></textarea>
+<textarea id="result" rows="4" cols="100"></textarea>
 <br />
 <br />
 命名空间：<input type="text" id="namespace" />
@@ -27,11 +27,11 @@
 <input type="button" value="getDescriptor" id="getDescriptor" />
 <br/>
 <input type="button" value="tableExists" id="tableExists" />
+<input type="button" value="isTableAvailable" id="isTableAvailable" />
 <input type="button" value="isTableDisabled" id="isTableDisabled" />
 <input type="button" value="disableTable" id="disableTable" />
 <input type="button" value="isTableEnabled" id="isTableEnabled" />
 <input type="button" value="enableTable" id="enableTable" />
-<input type="button" value="isTableAvailable" id="isTableAvailable" />
 <br/>
 <input type="button" value="创建命名空间" id="namespacecreate" />
 <input type="button" value="删除命名空间" id="namespacedelete" />
@@ -43,6 +43,7 @@
 </body>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+function getParams() {
 	var namespace = $('#namespace').val();
 	var name = $('#name').val();
 	var includeSysTables = $('input[type=radio]:checked').val();
@@ -56,48 +57,86 @@
 	if (includeSysTables != 'null') {
 		params.includeSysTables = includeSysTables;
 	}
-	
+	return params;
+}
+
 $("#listTableNames").click(function(){
-	$.post('/hbase-mybatis/hbase/table/listTableNames',params,function(data){
+	$.post('/hbase-mybatis/hbase/table/listTableNames',getParams(),function(data){
 		$('#result').val(JSON.stringify(data));
 	});
 });
 $("#listTableNamesByNameRegex").click(function(){
-	$.post('/hbase-mybatis/hbase/table/listTableNamesByNameRegex',params,function(data){
+	$.post('/hbase-mybatis/hbase/table/listTableNamesByNameRegex',getParams(),function(data){
 		$('#result').val(JSON.stringify(data));
 	});
 });
 $("#listTableNamesByNamespace").click(function(){
-	$.post('/hbase-mybatis/hbase/table/listTableNamesByNamespace',params,function(data){
+	$.post('/hbase-mybatis/hbase/table/listTableNamesByNamespace',getParams(),function(data){
 		$('#result').val(JSON.stringify(data));
 	});
 });
 
 $("#listTableDescriptors").click(function(){
-	$.post('/hbase-mybatis/hbase/table/listTableDescriptors',params,function(data){
+	$.post('/hbase-mybatis/hbase/table/listTableDescriptors',getParams(),function(data){
 		$('#result').val(JSON.stringify(data));
 	});
 });
 $("#listTableDescriptorsByNames").click(function(){
-	$.post('/hbase-mybatis/hbase/table/listTableDescriptorsByNames',params,function(data){
+	$.post('/hbase-mybatis/hbase/table/listTableDescriptorsByNames',getParams(),function(data){
 		$('#result').val(JSON.stringify(data));
 	});
 });
 $("#listTableDescriptorsByNameRegex").click(function(){
 	var name = $('#name').val();
-	$.post('/hbase-mybatis/hbase/table/listTableDescriptorsByNameRegex',params,function(data){
+	$.post('/hbase-mybatis/hbase/table/listTableDescriptorsByNameRegex',getParams(),function(data){
 		$('#result').val(JSON.stringify(data));
 	});
 });
 $("#listTableDescriptorsByNamespace").click(function(){
 	var name = $('#name').val();
-	$.post('/hbase-mybatis/hbase/table/listTableDescriptorsByNamespace',params,function(data){
+	$.post('/hbase-mybatis/hbase/table/listTableDescriptorsByNamespace',getParams(),function(data){
 		$('#result').val(JSON.stringify(data));
 	});
 });
 $("#getDescriptor").click(function(){
 	var name = $('#name').val();
-	$.post('/hbase-mybatis/hbase/table/getDescriptor',params,function(data){
+	$.post('/hbase-mybatis/hbase/table/getDescriptor',getParams(),function(data){
+		$('#result').val(JSON.stringify(data));
+	});
+});
+$("#tableExists").click(function(){
+	var name = $('#name').val();
+	$.post('/hbase-mybatis/hbase/table/tableExists',getParams(),function(data){
+		$('#result').val(JSON.stringify(data));
+	});
+});
+$("#isTableAvailable").click(function(){
+	var name = $('#name').val();
+	$.post('/hbase-mybatis/hbase/table/isTableAvailable',getParams(),function(data){
+		$('#result').val(JSON.stringify(data));
+	});
+});
+$("#isTableDisabled").click(function(){
+	var name = $('#name').val();
+	$.post('/hbase-mybatis/hbase/table/isTableDisabled',getParams(),function(data){
+		$('#result').val(JSON.stringify(data));
+	});
+});
+$("#disableTable").click(function(){
+	var name = $('#name').val();
+	$.post('/hbase-mybatis/hbase/table/disableTable',getParams(),function(data){
+		$('#result').val(JSON.stringify(data));
+	});
+});
+$("#isTableEnabled").click(function(){
+	var name = $('#name').val();
+	$.post('/hbase-mybatis/hbase/table/isTableEnabled',getParams(),function(data){
+		$('#result').val(JSON.stringify(data));
+	});
+});
+$("#enableTable").click(function(){
+	var name = $('#name').val();
+	$.post('/hbase-mybatis/hbase/table/enableTable',getParams(),function(data){
 		$('#result').val(JSON.stringify(data));
 	});
 });
